@@ -6,7 +6,7 @@
             <div class="col-md-6">
                 <div class="sign-in-container">
                     <h2>Sign in using your Google account</h2>
-                    <button class="btn btn-primary btn-lge" v-bind:click="signIn">Sign in</button>
+                    <button class="btn btn-primary btn-lge" v-on:click="signIn">Sign in</button>
                 </div>
             </div>
         </div>
@@ -15,7 +15,6 @@
 </template>
 
 <script>
-
 
     export default {
         props: [
@@ -28,6 +27,11 @@
             }
         },
         methods: {
+            signIn(){
+                this.$emit('sign');
+            }
+        },
+        firebase: {
 
         }
     }

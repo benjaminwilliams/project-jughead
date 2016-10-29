@@ -8,7 +8,13 @@
 </head>
 <body>
 <div id="app">
-    <login-form v-if="!signedIn"></login-form>
+    <login-form v-if="!signedIn" v-on:sign="signIn"></login-form>
+    {{user}}
+    {{errorCode}}
+    {{errorMessage}}
+    <div v-if="signedIn">
+        {{user}}
+    </div>
 </div>
 <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
 <script src="https://cdn.jsdelivr.net/vuefire/1.0.0/vuefire.min.js"></script>
