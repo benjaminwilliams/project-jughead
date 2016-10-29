@@ -29,30 +29,67 @@ var vm = new Vue({
     el: '#app',
     data: {
         signedIn: false,
-        user: "",
+        user: {},
         errorCode: "",
-        errorMessage: ""
+        errorMessage: "",
+        gifts: ""
     },
     components: {
         'login-form': LoginForm
     },
     methods: {
+        checkSignedIn: function(){
+            var self = this;
+            firebaseApp.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    self.signedIn = true;
+                    self.user = user;
+                    self.displayGifts();
+                } else {
+                    self.signedIn = false;
+                }
+            });
+        },
         signIn: function(){
+            var self = this;
 
             firebaseApp.auth().signInWithPopup(provider).then(function(result) {
-                // This gives you a Google Access Token. You can use it to access the Google API.
                 console.log(result);
                 var token = result.credential.accessToken;
+                self.user = result.user;
                 // The signed-in user info.
                // this.user = result.user;
                 // ...
             })
+        },
+        displayGifts: function(){
+            var self = this;
+
+            return firebaseApp.database().ref('/gifts/').once('value').then(function(snapshot) {
+                self.gifts = snapshot.val();
+            });
+
+        },
+        createGift: function(){
+            var self = this;
+
+            var postsRef = firebaseApp.database().ref("gifts");
+
+            // we can also chain the two calls together
+            postsRef.push().set({
+                author: "alanisawesome",
+                title: "The Turing Machine"
+            });
+
+            //var postID = postsRef.key();
         }
     },
     firebase: {
 
     }
 });
+
+vm.checkSignedIn();
 
 
 
