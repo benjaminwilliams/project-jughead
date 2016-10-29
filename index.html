@@ -5,36 +5,13 @@
     <title>Title</title>
     <link rel="stylesheet" href="build/vendor.css">
     <link rel="stylesheet" href="build/style.css">
-
 </head>
 <body>
-
 <div id="app">
-    <div id="sign-in">Sign in</div>
-    {{ message }}
-    <ol>
-        <li v-for="gift in gifts">
-            {{gift.text}}
-        </li>
-    </ol>
-
-    <div>
-        <label>Username</label>
-        <input v-model="username">
-        <button v-on:click="setUserName(username)"> Set </button>
-    </div>
-    <div>
-        Current Username: {{username}}
-    </div>
-
-    <input v-model="testBind">
-    <button v-on:click="setGift(testBind)"> click me</button>
-    <div v-on:click="getData">
-        data: {{text}}
-    </div>
-
+    <login-form v-if="!signedIn"></login-form>
 </div>
 <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
-<script src="build/scripts.js"></script>
+<script src="https://cdn.jsdelivr.net/vuefire/1.0.0/vuefire.min.js"></script>
+<script src="build/bundle.js"></script>
 </body>
 </html>

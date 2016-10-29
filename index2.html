@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="build/vendor.css">
+    <link rel="stylesheet" href="build/style.css">
+
+</head>
+<body>
+
+<div id="app">
+    <login-form v-if="!signedIn"></login-form>
+    <div v-if="signedIn">
+
+        <div v-if="signedIn">Signed in already</div>
+        <div id="sign-in">Sign in</div>
+        {{ message }}
+        <ol>
+            <li v-for="gift in gifts">
+                {{gift.text}}
+            </li>
+        </ol>
+
+        <div>
+            <label>Username</label>
+            <input v-model="username">
+            <button v-on:click="setUserName(username)"> Set </button>
+        </div>
+        <div>
+            Current Username: {{username}}
+        </div>
+
+        <input v-model="testBind">
+        <button v-on:click="setGift(testBind)"> click me</button>
+        <div v-on:click="getData">
+            data: {{text}}
+        </div>
+
+    </div>
+
+
+</div>
+
+<template id="login-form">
+
+</template>
+<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+<script src="build/vue.js"></script>
+<script src="build/bundle.js"></script>
+</body>
+</html>
