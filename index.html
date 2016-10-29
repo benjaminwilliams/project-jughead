@@ -15,8 +15,15 @@
         <div>
             Current gifts: {{gifts}}
         </div>
-        <div v-on:click="createGift">
-            add gift
+        <div >
+            <label>Name</label>
+            <input type="text" v-model="newGiftName">
+
+            <label>Goal</label>
+            <input type="text" v-model="newGiftGoal">
+
+            <button class="btn btn-primary" v-on:click="createGift">Submit</button>
+
         </div>
     </div>
 </div>

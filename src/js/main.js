@@ -32,7 +32,9 @@ var vm = new Vue({
         user: {},
         errorCode: "",
         errorMessage: "",
-        gifts: ""
+        gifts: "",
+        newGiftName: "",
+        newGiftGoal: ""
     },
     components: {
         'login-form': LoginForm
@@ -77,8 +79,8 @@ var vm = new Vue({
 
             // we can also chain the two calls together
             postsRef.push().set({
-                author: "alanisawesome",
-                title: "The Turing Machine"
+                name: self.newGiftName,
+                goal: self.newGiftGoal
             });
 
             //var postID = postsRef.key();
