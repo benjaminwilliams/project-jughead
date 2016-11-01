@@ -7,23 +7,48 @@
     <link rel="stylesheet" href="build/style.css">
 </head>
 <body>
-<div id="app">
-    <login-form v-if="!signedIn" v-on:sign="signIn"></login-form>
 
-    <div v-if="signedIn">
-        <div>Welcome {{user.displayName}}</div>
-        <div>
-            Current gifts: {{gifts}}
+<div id="app" class="container">
+    <div class="loading" v-if="loading">
+        Loading...
+    </div>
+    <div v-if="!loading">
+        <div class="row">
+            <div class="col-md-6">
+                <div v-if="signedIn">
+                    <h1>Test App</h1>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div v-if="signedIn">
+                    <div>Welcome {{user.displayName}}, <span v-on:click="signOut">Sign out</span></div>
+                </div>
+            </div>
         </div>
-        <div >
-            <label>Name</label>
-            <input type="text" v-model="newGiftName">
+        <login-form v-if="!signedIn" v-on:sign="signIn"></login-form>
+        <div v-if="signedIn">
+            <div>
+                <div class="gift-index-item" v-for="item in gifts">
+                    <h3>{{item.name}}</h3>
+                    for {{item.for}}
 
-            <label>Goal</label>
-            <input type="text" v-model="newGiftGoal">
+                </div>
+            </div>
+            <div v-if="createNew">
+                <form>
+                    <label>Gift Name</label>
+                    <input type="text" v-model="newGiftName">
 
-            <button class="btn btn-primary" v-on:click="createGift">Submit</button>
+                    <label>Goal</label>
+                    <input type="text" v-model="newGiftGoal">
 
+                    <label>Who is this for?</label>
+                    <input type="text" v-model="newGiftFor">
+
+                    <button class="btn btn-primary" v-on:click="createGift">Submit</button>
+                </form>
+
+            </div>
         </div>
     </div>
 </div>
